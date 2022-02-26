@@ -18,6 +18,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -133,7 +134,10 @@ export default function Formations() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.name}
+                component={Link}
+                to={`/formations/${row.codeFormation}`}
+                style={{ textDecoration: 'none', color: 'black' }}>
               <TableCell component="th" scope="row">
                 {row.codeFormation}
               </TableCell>

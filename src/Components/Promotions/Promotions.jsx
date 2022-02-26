@@ -19,6 +19,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import {Link} from 'react-router-dom';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -134,18 +135,22 @@ export default function Promotions() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow 
-            key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.siglePromotion}
-              </TableCell>
-              <TableCell align="center">
-                {row.nbMaxEtudiant}
-              </TableCell>
-            </TableRow>
+            <>
+              <TableRow
+                component={Link}
+                to={`/promotions/${row.id.codeFormation}/${row.id.anneeUniversitaire}`}
+                style={{ textDecoration: 'none', color: 'black' }}
+                key={row.name}>
+                <TableCell component="th" scope="row">
+                  {row.siglePromotion}
+                </TableCell>
+                <TableCell align="center">
+                  {row.nbMaxEtudiant}
+                </TableCell>
+              </TableRow>
+              
+            </>
           ))}
-
-          
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>

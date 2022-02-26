@@ -3,6 +3,7 @@ import Dashboard from './Components/Dashboard/Dashboard'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Layout from './Components/Layout/Layout';
 import Candidats from './Components/Candidats/Candidats';
+import CandidatDetails from './Components/CandidatDetails/CandidatDetails';
 import Enseignants from './Components/Enseignants/Enseignants';
 import Formations from './Components/Formations/Formations';
 import Promotions from './Components/Promotions/Promotions';
@@ -16,6 +17,9 @@ function App() {
         <Route exact path="/candidats">
           <Candidats />
         </Route>
+        <Route exact path="/candidats/:id">
+          <CandidatDetails />
+        </Route>
         <Route exact path="/enseignants">
           <Enseignants />
         </Route>
@@ -25,6 +29,7 @@ function App() {
         <Route exact path="/promotions">
           <Promotions/>
         </Route>
+        
       </Switch>
       </Layout>
     </Router>
