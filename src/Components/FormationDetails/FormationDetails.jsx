@@ -14,6 +14,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Axios from 'axios';
+import FormationOptions from './FormationOptions';
 
 
 const ExpandMore = styled((props) => {
@@ -53,7 +54,7 @@ console.log(formation);
         }
         action={
           <IconButton aria-label="settings">
-            <DropDownMenu />
+            <FormationOptions />
           </IconButton>
         }
         title={formation.nomFormation}
