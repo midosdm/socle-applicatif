@@ -69,9 +69,13 @@ export default function FormationOptions() {
 
   const handleDelete = () => {
     console.log("deleting formation: " +id);
-    // axios.delete("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/formations/" + id)
-    // .then(history.push("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/formations"));
+    axios.delete("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/formations/" + id)
+    .then(history.push("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/formations"));
     history.push("/formations")
+  }
+
+  const handleEdit = () => {
+    history.push("/modifierFormation/" + id);
   }
 
   return (
@@ -97,7 +101,7 @@ export default function FormationOptions() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleEdit} disableRipple>
           <EditIcon />
           Edit
         </MenuItem>

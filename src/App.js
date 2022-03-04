@@ -13,6 +13,9 @@ import Promotions from './Components/Promotions/Promotions';
 import PromotionDetails from './Components/PromotionDetails/PromotionDetails';
 import CreateFormation from './Components/CreateFromation/CreateFormation'
 import CreateEnseignant from './Components/CreateEnseignant/CreateEnseignant';
+import ModifierEnseignant from './Components/ModifierEnseignant/ModifierEnseignant';
+import CreatePromotion from './Components/CreatePromotion/CreatePromotion';
+import ModifierFormation from './Components/ModifierFormation/ModifierFormation';
 
 
 function App() {
@@ -53,6 +56,16 @@ function App() {
         </Route>
         <Route exact path="/createEnseignant">
           <CreateEnseignant />
+        </Route>
+        <Route exact path="/createPromotion">
+          <CreatePromotion />
+        </Route>
+
+        <Route exact path="/modifierEnseignant/:id">
+          <ModifierEnseignant />
+        </Route>
+        <Route exact path="/modifierFormation/:id">
+          <ModifierFormation />
         </Route>
         
       </Switch>

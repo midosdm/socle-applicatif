@@ -69,8 +69,8 @@ export default function CandidatOptions() {
 
   const handleDelete = () => {
     console.log("deleting candidat: " +id);
-    // axios.delete("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/candidats/" + id)
-    // .then(history.push("/candidats"));
+    axios.delete("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/candidats/" + id)
+    .then(history.push("/candidats"));
     history.push("/candidats");
   }
 

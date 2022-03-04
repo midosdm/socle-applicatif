@@ -70,8 +70,8 @@ export default function PromotionOptions() {
 
   const handleDelete = () => {
     console.log("deleting promotion: " +codeFormation + " - " +anneeUniversitaire);
-    // axios.delete("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/promotions/" + codeFormation +"/" + anneeUniversitaire)
-    // .then(history.push("/promotions"));
+    axios.delete("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/promotions/" + codeFormation +"/" + anneeUniversitaire)
+    .then(history.push("/promotions"));
     history.push("/promotions");
   }
 

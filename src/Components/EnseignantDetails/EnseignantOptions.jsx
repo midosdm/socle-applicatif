@@ -60,18 +60,25 @@ export default function EnseignantOptions() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  
 
   const {id} = useParams();
   const history = useHistory();
 
   const handleDelete = () => {
     console.log("deleting enseignant: " +id);
-    // axios.delete("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/enseignants/" + id)
-    // .then(history.push("/enseignants"));
+    axios.delete("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/enseignants/" + id)
+    .then(history.push("/enseignants"));
     history.push("/enseignants");
+  }
+
+  const handleEdit = () => {
+    history.push("/modifierEnseignant/" + id);
   }
 
   return (
@@ -97,7 +104,7 @@ export default function EnseignantOptions() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleEdit} disableRipple>
           <EditIcon />
           Edit
         </MenuItem>

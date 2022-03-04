@@ -1,7 +1,8 @@
-import { useState } from "react";
-import CreateEnseignantStyle from './CreateEnseignantStyle.css'
+import { useState, useEffect } from "react";
+import ModifierEnseignantStyle from './ModifierEnseignantStyle.css';
+import { useParams } from "react-router-dom";
 import axios from 'axios';
-const CreateEnseignant = () => {
+const ModifierEnseignant = () => {
   const [nom, setNom] = useState('');
   const [prenom, setPrenom] = useState('');
   const [noEnseignant, setNoEnseignant] = useState('');
@@ -10,13 +11,23 @@ const CreateEnseignant = () => {
   const [emailPerso, setEmailPerso] = useState('');
   const [mobile, setMobile] = useState('');
   const [pays, setPays] = useState('');
+  const {id} = useParams();
+  const [oldEnseignant, setOldEnseignant] = useState([]);
+
+    useEffect(() => {
+        axios.get("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/enseignants/" + id)
+        .then(response => setOldEnseignant(response.data))
+    }, []);
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const enseignant = {nom: nom, prenom: prenom, adresse: adresse, emailUbo: emailUbo, emailPerso: emailPerso, mobile: mobile, pays: pays, noEnseignant:noEnseignant}
     console.log(enseignant);
     console.log(nom);
-    fetch('https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/enseignants', {
+
+    console.log(oldEnseignant);
+    fetch('https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/enseignants/' + id, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(enseignant)
@@ -30,6 +41,7 @@ const CreateEnseignant = () => {
                 console.log('error');
             }
             else {
+                //history.push('/login');
                 console.log('success');
             }
         });
@@ -46,12 +58,13 @@ const CreateEnseignant = () => {
 
   return (
     <div className="create">
-      <h2>Ajouter Enseignant</h2>
+      <h2>Modifier Enseignant</h2>
       <form>
       <label>Numero Enseignant:</label>
         <input 
           type="text" 
           required 
+          placeholder={oldEnseignant.noEnseignant}
           value={noEnseignant}
           onChange={(e) => setNoEnseignant(e.target.value)}
         />
@@ -59,6 +72,7 @@ const CreateEnseignant = () => {
         <input 
           type="text" 
           required 
+          placeholder={oldEnseignant.nom}
           value={nom}
           onChange={(e) => setNom(e.target.value)}
         />
@@ -66,6 +80,7 @@ const CreateEnseignant = () => {
         <input 
           type="text" 
           required 
+          placeholder={oldEnseignant.prenom}
           value={prenom}
           onChange={(e) => setPrenom(e.target.value)}
         />
@@ -73,6 +88,7 @@ const CreateEnseignant = () => {
         <input 
           type="text" 
           required 
+          placeholder={oldEnseignant.adresse}
           value={adresse}
           onChange={(e) => setAdresse(e.target.value)}
         />
@@ -104,10 +120,10 @@ const CreateEnseignant = () => {
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
         />
-        <button onClick={handleSubmit}>Ajouter</button>
+        <button onClick={handleSubmit}>Modifier</button>
       </form>
     </div>
   );
 }
  
-export default CreateEnseignant;
+export default ModifierEnseignant;

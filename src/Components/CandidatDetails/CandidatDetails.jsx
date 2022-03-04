@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PersonIcon from '@material-ui/icons/Person';
-import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Axios from 'axios';
 import CandidatOptions from './CandidatOptions';

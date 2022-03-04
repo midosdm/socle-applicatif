@@ -36,19 +36,39 @@ const Dashboard = () => {
         path: '/candidats'
       },
       {
+        text: 'Ajouter Candidat',
+        icon: <SubjectOutlined color="secondary" />,
+        path: '/createCandidat'
+      },
+      {
         text: 'enseignant',
         icon: <SubjectOutlined color="secondary" />,
         path: '/enseignants'
       },
       {
-        text: 'formation',
+        text: 'Ajouter Enseignant',
+        icon: <SubjectOutlined color="secondary" />,
+        path: '/createEnseignant'
+      },
+      {
+        text: 'Formation',
         icon: <SubjectOutlined color="secondary" />,
         path: '/formations'
       },
       {
-        text: 'promotion',
+        text: 'Ajouter Formation',
+        icon: <SubjectOutlined color="secondary" />,
+        path: '/createFormation'
+      },
+      {
+        text: 'Promotion',
         icon: <SubjectOutlined color="secondary" />,
         path: '/promotions'
+      },
+      {
+        text: 'Ajouter Promotion',
+        icon: <SubjectOutlined color="secondary" />,
+        path: '/createPromotion'
       }
     ]
 

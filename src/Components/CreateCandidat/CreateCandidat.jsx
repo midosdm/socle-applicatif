@@ -11,11 +11,28 @@ const CreateCandidat = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const candidat = {nom: nom, prenom: prenom, adresse: adresse, email: email, mobile: mobile}
-    axios.post('https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/candidats', { candidat })
-      .then(res=>{
-        console.log(res);
-        console.log(res.data);
-      })
+    fetch('https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/candidats', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(candidat)
+        }).then((response) => {
+            if(!response.ok){
+                response.json().then(
+                    data => {
+                      console.log(data.message);
+                    }
+                )
+                console.log('error');
+            }
+            else {
+                console.log('success');
+            }
+        });
+    // axios.post('https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/candidats', { candidat })
+    //   .then(res=>{
+    //     console.log(res);
+    //     console.log(res.data);
+    //   })
   }
 
   return (

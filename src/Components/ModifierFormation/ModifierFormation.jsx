@@ -1,18 +1,32 @@
-import { useState } from "react";
-import CreateFormationStyle from './CreateFormationStyle.css'
+import { useState, useEffect } from "react";
+import ModifierFormationStyle from './ModifierFormationStyle.css';
+import { useParams } from "react-router-dom";
 import axios from 'axios';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+const ModifierFormation = () => {
+    const [codeFormation, setCodeFormation] = useState('');
+    const [diplome, setDiplome] = useState('');
+    const [doubleDiplome, setDoubleDiplome] = useState('');
+    const [nomFormation, setNomFormation] = useState('');
+    const history = useHistory();
+  const {id} = useParams();
+  const [oldFormation, setOldFormation] = useState([]);
 
-const CreateFormation = () => {
-  const [codeFormation, setCodeFormation] = useState('');
-  const [diplome, setDiplome] = useState('');
-  const [doubleDiplome, setDoubleDiplome] = useState('');
-  const [nomFormation, setNomFormation] = useState('');
+    useEffect(() => {
+        axios.get("https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/formations/" + id)
+        .then(response => setOldFormation(response.data))
+    }, []);
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const formation = {codeFormation: codeFormation, diplome: diplome, doubleDiplome: doubleDiplome, nomFormation: nomFormation}
-    fetch('https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/enseignants', {
-            method: 'POST',
+    console.log(formation);
+    console.log(nomFormation);
+
+    console.log(oldFormation);
+    fetch('https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/formations', {
+            method: 'PUT',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(formation)
         }).then((response) => {
@@ -26,24 +40,21 @@ const CreateFormation = () => {
             }
             else {
                 console.log('success');
+                history.push('/formations');
             }
         });
     
-    // axios.post('https://app-9f355f19-90a4-4e35-ade0-3982076a7ad4.cleverapps.io/formations', { formation })
-    //   .then(res=>{
-    //     console.log(res);
-    //     console.log(res.data);
-    //   })
   }
 
   return (
     <div className="create">
-      <h2>Ajouter Formation</h2>
+      <h2>Modifier Formation</h2>
       <form>
         <label>codeFormation:</label>
         <input 
           type="text" 
           required 
+            placeholder={oldFormation.codeFormation}
           value={codeFormation}
           onChange={(e) => setCodeFormation(e.target.value)}
         />
@@ -51,6 +62,8 @@ const CreateFormation = () => {
         <input 
           type="text" 
           required 
+          placeholder={oldFormation.diplome}
+
           value={diplome}
           onChange={(e) => setDiplome(e.target.value)}
         />
@@ -58,6 +71,8 @@ const CreateFormation = () => {
         <input 
           type="text" 
           required 
+          placeholder={oldFormation.doubleDiplome}
+
           value={doubleDiplome}
           onChange={(e) => setDoubleDiplome(e.target.value)}
         />
@@ -65,13 +80,15 @@ const CreateFormation = () => {
         <input 
           type="text" 
           required 
+          placeholder={oldFormation.nomFormation}
+
           value={nomFormation}
           onChange={(e) => setNomFormation(e.target.value)}
         />
-        <button onClick={handleSubmit}>Ajouter</button>
+        <button onClick={handleSubmit}>Modifier</button>
       </form>
     </div>
   );
 }
  
-export default CreateFormation;
+export default ModifierFormation;
